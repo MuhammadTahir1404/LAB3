@@ -1,1 +1,109 @@
+interface CommonFunctions {
+    void searchTicket();
+    void bookTicket();
+    void cancelTicket();
+    void makePayment();
+    void fillDetails();
+}
+
+class Customer {
+    private String customerId, name, address;
+    private int phoneNo, age;
+
+    public Customer(String customerId, String name, String address, int phoneNo, int age) {
+        this.customerId = customerId;
+        this.name = name;
+        this.address = address;
+        this.phoneNo = phoneNo;
+        this.age = age;
+    }
+
+    public String getCustomerId() {
+        return customerId;
+    }
+
+    public void displayInfo() {
+        System.out.printf("Customer: ID=%s, Name=%s, Address=%s, Phone=%d, Age=%d%n",
+                          customerId, name, address, phoneNo, age);
+    }
+}
+
+class Agent {
+    private int id;
+    private String name;
+
+    public Agent(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public void displayInfo() {
+        System.out.printf("Agent: ID=%d, Name=%s%n", id, name);
+    }
+}
+
+class Ticket {
+    private String source, destination, dateOfJourney, time, busNo, seatNo;
+
+    public Ticket(String source, String destination, String dateOfJourney, 
+                  String time, String busNo, String seatNo) {
+        this.source = source;
+        this.destination = destination;
+        this.dateOfJourney = dateOfJourney;
+        this.time = time;
+        this.busNo = busNo;
+        this.seatNo = seatNo;
+    }
+
+    public void displayInfo() {
+        System.out.printf("Ticket: %s to %s on %s at %s, Bus=%s, Seat=%s%n", 
+                          source, destination, dateOfJourney, time, busNo, seatNo);
+    }
+}
+
+class Refund {
+    private float amount;
+    private String customerId;
+
+    public Refund(float amount, String customerId) {
+        this.amount = amount;
+        this.customerId = customerId;
+    }
+
+    public void processRefund() {
+        System.out.printf("Refunding $%.2f to customer ID: %s%n", amount, customerId);
+    }
+}
+
+class BookingService implements CommonFunctions {
+    public void searchTicket() { System.out.println("Searching ticket..."); }
+    public void bookTicket() { System.out.println("Booking ticket..."); }
+    public void cancelTicket() { System.out.println("Cancelling ticket..."); }
+    public void makePayment() { System.out.println("Processing payment..."); }
+    public void fillDetails() { System.out.println("Filling details..."); }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Customer customer = new Customer("C001", "John Doe", "123 Elm St", 1234567890, 30);
+        customer.displayInfo();
+
+        Agent agent = new Agent(101, "Agent Smith");
+        agent.displayInfo();
+
+        Ticket ticket = new Ticket("New York", "Los Angeles", "2024-12-01", "08:30 AM", "Bus101", "Seat21");
+        ticket.displayInfo();
+
+        Refund refund = new Refund(50.00f, customer.getCustomerId());
+        refund.processRefund();
+
+        BookingService service = new BookingService();
+        System.out.println("\nPerforming common functions:");
+        service.searchTicket();
+        service.bookTicket();
+        service.cancelTicket();
+        service.makePayment();
+        service.fillDetails();
+    }
+}
 
